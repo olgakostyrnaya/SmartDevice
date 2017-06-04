@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:tileMode="repeat">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="12dp"
+        android:layout_x="15dp"
+        android:layout_y="0dp"
+        android:background="@color/common_google_signin_btn_text_light_default"
+        android:elevation="2dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/lightSensor"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/lightoff"></RelativeLayout>
+
+        <Button
+            android:id="@+id/SwitchButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_x="4dp"
+            android:layout_y="81dp"
+            android:background="?android:attr/colorPrimary"
+            android:text="Включить"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            tools:layout_editor_absoluteX="-174dp"
+            tools:layout_editor_absoluteY="-69dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
