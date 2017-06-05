@@ -92,14 +92,4 @@
             app:layout_constraintVertical_bias="0.396" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textViewResultConnect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
-        android:text="TextView"
-        android:textColor="#4169E1" />
-
 </RelativeLayout>

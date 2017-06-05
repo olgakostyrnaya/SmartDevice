@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -20,9 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button enteranceKey;
     EditText hostAddress;
-    TextView message;
-    private int code;
-    private Intent intent = new Intent(this, RoomActivity.class);
+    private String hostName = "";
     private static String SUCCESS = "Успешно подключено";
     private static String FAIL = "Невозможно подключиться";
 
@@ -31,11 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         enteranceKey = (Button) findViewById(R.id.btnAcceptAddress);
         hostAddress = (EditText) findViewById(R.id.editTextAddress);
-        message = (TextView) findViewById(R.id.textViewResultConnect);
-        message.setText("");
         enteranceKey.setOnClickListener(this);
     }
 
@@ -43,22 +39,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnAcceptAddress:
-                message.setText("");
-                Intent intent = new Intent(this, RoomActivity.class);
-                String hostName = hostAddress.getText().toString();
-                intent.putExtra("hostAddress", hostName);
-                new HttpRequestTask(hostName);
-
+                hostName = "http://" + hostAddress.getText().toString();
+                new HttpRequestTask().execute(hostName);
             default:
                 break;
         }
     }
 
-    class HttpRequestTask extends AsyncTask<String,Void,Integer>{
+    class HttpRequestTask extends AsyncTask<String,RoomActivity,Integer>{
 
-        public HttpRequestTask(String hostName) {
-
-        }
 
         @Override
         protected Integer doInBackground(String... params) {
@@ -79,19 +68,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
                 Log.e("2", "Connection Error !!! - " + e.toString());
             }
-            return null;
+            return 0;
         }
 
         @Override
         protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
-            if (code != 404 && code == 200)
+            if (result == 200)
             {
-
-                message.setText(SUCCESS);
+                Toast.makeText(getBaseContext(), SUCCESS, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), RoomActivity.class);
+                intent.putExtra("hostAddress", hostName);
                 startActivity(intent);
+
             } else {
-                message.setText(FAIL);
+                Toast.makeText(getBaseContext(), FAIL, Toast.LENGTH_SHORT).show();
             }
         }
     }
