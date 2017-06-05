@@ -1,6 +1,7 @@
 package com.smarthome.kostyrnaya.controlyourhome;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,Runnable {
 
     Button enteranceKey;
     EditText hostAddress;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         enteranceKey = (Button) findViewById(R.id.btnAcceptAddress);
         hostAddress = (EditText) findViewById(R.id.editTextAddress);
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, RoomActivity.class);
                 String hostName = hostAddress.getText().toString();
                 intent.putExtra("hostAddress", hostName);
-                int code = sendGet("http://"+hostName);
+                int code = sendGet(hostName);
                 if (code != 404 && code == 200)
                 {
                     message.setText(SUCCESS);
@@ -72,5 +74,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.e("2", "Connection Error !!! - " + e.toString());
         }
     return 404;
+    }
+
+
+    @Override
+    public void run() {
+
     }
 }
