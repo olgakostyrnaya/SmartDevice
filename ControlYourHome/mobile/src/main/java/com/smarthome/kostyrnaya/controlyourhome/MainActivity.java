@@ -16,11 +16,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,Runnable {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button enteranceKey;
     EditText hostAddress;
     TextView message;
+    private int code;
+    private Intent intent = new Intent(this, RoomActivity.class);
     private static String SUCCESS = "Успешно подключено";
     private static String FAIL = "Невозможно подключиться";
 
@@ -45,40 +47,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(this, RoomActivity.class);
                 String hostName = hostAddress.getText().toString();
                 intent.putExtra("hostAddress", hostName);
-                int code = sendGet(hostName);
-                if (code != 404 && code == 200)
-                {
-                    message.setText(SUCCESS);
-                    startActivity(intent);
-                } else {
-                    message.setText(FAIL);
-                }
-                break;
+                new HttpRequestTask(hostName);
+
             default:
                 break;
         }
     }
 
-    private int sendGet(String urlString) {
-        try {
-            URL url = new URL(urlString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("User-Agent", "myApp");
-            System.setProperty("http.agent", "");
-            connection.setRequestMethod("GET");
-            connection.setDoInput(true);
-            connection.connect();
-            return connection.getResponseCode();
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("2", "Connection Error !!! - " + e.toString());
+    class HttpRequestTask extends AsyncTask<String,Void,Integer>{
+
+        public HttpRequestTask(String hostName) {
+
         }
-    return 404;
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            String urlString = "";
+            if( params.length > 0 ){
+                urlString = params[0];
+            }
+            try {
+                URL url = new URL(urlString);//use a proper url instead of onlineUrl
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("User-Agent", "myApp");
+                System.setProperty("http.agent", "");
+                connection.setRequestMethod("GET");
+                connection.setDoInput(true);
+                connection.connect();
+                return connection.getResponseCode();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e("2", "Connection Error !!! - " + e.toString());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+            if (code != 404 && code == 200)
+            {
+
+                message.setText(SUCCESS);
+                startActivity(intent);
+            } else {
+                message.setText(FAIL);
+            }
+        }
     }
 
-
-    @Override
-    public void run() {
-
-    }
 }
