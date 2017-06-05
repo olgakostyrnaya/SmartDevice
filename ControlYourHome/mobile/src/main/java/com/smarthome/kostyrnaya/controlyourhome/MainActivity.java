@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int sendGet(String urlString) {
         try {
-            URL url = new URL(urlString);//use a proper url instead of onlineUrl
+            URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("User-Agent", "myApp");
             System.setProperty("http.agent", "");
