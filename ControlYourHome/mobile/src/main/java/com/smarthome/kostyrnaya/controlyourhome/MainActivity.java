@@ -57,14 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void sleep(int millisecond){
-        try {
-            Thread.sleep(millisecond);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     private int sendGet(String urlString) {
         try {
             URL url = new URL(urlString);//use a proper url instead of onlineUrl
