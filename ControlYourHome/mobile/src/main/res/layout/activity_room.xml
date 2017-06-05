@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:tileMode="repeat">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background">
 
 
     <RelativeLayout
@@ -18,7 +17,7 @@
         android:layout_marginTop="12dp"
         android:layout_x="15dp"
         android:layout_y="0dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="#A9A9A9"
         android:elevation="2dp"
         android:paddingBottom="10dp"
         android:paddingEnd="10dp"
@@ -50,7 +49,7 @@
             android:layout_marginRight="20dp"
             android:layout_x="4dp"
             android:layout_y="81dp"
-            android:background="?android:attr/colorPrimary"
+            android:background="#4169E1"
             android:text="Включить"
             android:textColor="@color/colorPrimary"
             tools:layout_editor_absoluteX="-174dp"
