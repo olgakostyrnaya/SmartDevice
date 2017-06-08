@@ -38,9 +38,12 @@ public class RoomActivity extends AppCompatActivity implements View.OnClickListe
         switcher = (Button) findViewById(R.id.SwitchButton);
         lightSensor = (RelativeLayout) findViewById(R.id.lightSensor);
 
+        switcher.setOnClickListener(this);
+
         Intent intent = getIntent();
         host = intent.getStringExtra("hostAddress")+"/pChart/?op=value&p=Switch1.status";
         new HttpRequestTask().execute(host);
+
 
     }
 
